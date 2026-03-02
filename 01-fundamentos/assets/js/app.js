@@ -17,4 +17,4 @@ c = "Hola de nuevo";
 
 // console.table({ a, b, c, d, x });
 
-var miNombre = "Eduardo";
+let miNuevoNombe = "Eduardo Reyes";
