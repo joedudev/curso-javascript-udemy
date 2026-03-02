@@ -1,7 +1,7 @@
 let a = 10,
-	b = 10,
-	c = 10,
-	d = 10,
+	b = 20,
+	c = "Hola ",
+	d = "Spiderman",
 	x = a + b;
 
-console.log(x);
+const saludo = c + d;
