@@ -55,9 +55,9 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 | Section | Content                                    | Status | Recommended Tag          |
 | :------ | :----------------------------------------- | :----: | :----------------------- |
 | 01      | Introduction & Environment Setup           |   ✅   | `v0.1.0-intro`           |
-| 02      | JS Console & Basic Syntax                  |   🏗️   | `v0.2.0-basics`          |
-| 03      | Fundamentals (Primitives, Arrays, Objects) |   ⏳   | `v0.3.0-fundamentals`    |
-| 04      | Control Flow & Loops                       |   ⏳   | `v0.4.0-logic-flow`      |
+| 02      | JS Console & Basic Syntax                  |   ✅   | `v0.2.0-basics`          |
+| 03      | Fundamentals (Primitives, Arrays, Objects) |   ✅   | `v0.3.0-fundamentals`    |
+| 04      | Control Flow & Loops                       |   🏗️   | `v0.4.0-logic-flow`      |
 | 05      | **Lab 1: Blackjack Game**                  |   ⏳   | `v1.0.0-lab-blackjack`   |
 | 06      | Module Pattern & Optimizations             |   ⏳   | `v1.1.0-module-pattern`  |
 | 07      | Classes & ESNext Private Properties        |   ⏳   | `v1.2.0-classes-private` |
