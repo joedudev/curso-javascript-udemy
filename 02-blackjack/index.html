@@ -13,7 +13,36 @@
 		<link rel="stylesheet" href="assets/css/styles.css" />
 	</head>
 	<body>
-		<header>Blackjack</header>
+		<header class="titulo">Blackjack</header>
+		<div class="row mt-2">
+			<div class="col text-center">
+				<buton class="btn btn-danger">Nuevo Juego</buton>
+				<buton class="btn btn-primary">Pedir Carta</buton>
+				<buton class="btn btn-primary">Detener</buton>
+			</div>
+		</div>
+		<div class="row container">
+			<div class="col">
+				<h1>Jugador 1 = <small>0</small></h1>
+				<div id="jugador-cartas">
+					<img src="assets/cartas/2C.png" class="carta" />
+					<img src="assets/cartas/2C.png" class="carta" />
+					<img src="assets/cartas/2C.png" class="carta" />
+					<img src="assets/cartas/2C.png" class="carta" />
+				</div>
+			</div>
+		</div>
+		<div class="row container mt-2">
+			<div class="col">
+				<h1>Computadora 1 = <small>0</small></h1>
+				<div id="computadora-cartas">
+					<img src="assets/cartas/3C.png" class="carta" />
+					<img src="assets/cartas/3C.png" class="carta" />
+					<img src="assets/cartas/3C.png" class="carta" />
+					<img src="assets/cartas/3C.png" class="carta" />
+				</div>
+			</div>
+		</div>
 		<script src="assets/js/juego.js"></script>
 	</body>
 </html>
