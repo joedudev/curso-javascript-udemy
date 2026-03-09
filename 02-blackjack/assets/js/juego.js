@@ -19,6 +19,8 @@ let puntosComputadora = 0;
 const btnPedir = document.querySelector("#btnPedirCarta");
 const btnDetener = document.querySelector("#btnDetener");
 const btnNuevoJuego = document.querySelector("#btnNuevoJuego");
+const divCartasJugador = document.querySelector("#jugador-cartas");
+const divCartasComputadora = document.querySelector("#computadora-cartas");
 const puntosHTML = document.querySelectorAll("small");
 /**
  * 1. CREACIÓN DEL DECK
@@ -86,9 +88,31 @@ const valorCarta = (carta) => {
 };
 
 // Eventos
-
 btnPedir.addEventListener("click", () => {
 	const carta = pedirCarta();
 	puntosJugador += valorCarta(carta);
+
+	// Actualizamos el primer <small> (índice 0) con los puntos
 	puntosHTML[0].innerText = puntosJugador;
+
+	// Crear la imagen de la carta dinámicamente
+	const imgCarta = document.createElement("img");
+	imgCarta.src = `assets/cartas/${carta}.png`;
+	imgCarta.classList.add("carta");
+	divCartasJugador.appendChild(imgCarta);
+
+	// Lógica de control de juego
+	if (puntosJugador > 21) {
+		console.warn(
+			"%cLo siento, perdiste con " + puntosJugador,
+			"color: white; background: red; padding: 3px;",
+		);
+		btnPedir.disabled = true; // ¡Ahora sí funcionará!
+	} else if (puntosJugador === 21) {
+		console.warn(
+			"%c21, ¡Genial!",
+			"color: white; background: green; padding: 3px;",
+		);
+		btnPedir.disabled = true;
+	}
 });
