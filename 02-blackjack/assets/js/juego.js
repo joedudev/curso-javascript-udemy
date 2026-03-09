@@ -11,16 +11,20 @@ let deck = [];
 const tipos = ["C", "D", "H", "S"];
 const especiales = ["A", "J", "Q", "K"];
 
+let puntosJugador = 0;
+let puntosComputadora = 0;
+
+// Refrencias del HTMNL
+
+const btnPedir = document.querySelector("#btnPedirCarta");
+const btnDetener = document.querySelector("#btnDetener");
+const btnNuevoJuego = document.querySelector("#btnNuevoJuego");
+const puntosHTML = document.querySelectorAll("small");
 /**
  * 1. CREACIÓN DEL DECK
  * Genera una baraja de 52 cartas mezcladas.
  */
 const crearDeck = () => {
-	console.log(
-		"%c--- 📦 Creando Nuevo Deck ---",
-		"color: #3498db; font-weight: bold;",
-	);
-
 	// Cartas numéricas (2 al 10)
 	for (let i = 2; i <= 10; i++) {
 		for (let tipo of tipos) {
@@ -37,12 +41,6 @@ const crearDeck = () => {
 
 	// Mezclamos usando Underscore.js
 	deck = _.shuffle(deck);
-
-	console.log("Deck Barajado:", deck);
-	console.log(
-		`Total de cartas: %c${deck.length}`,
-		"color: #2ecc71; font-weight: bold;",
-	);
 };
 
 crearDeck();
@@ -59,9 +57,6 @@ const pedirCarta = () => {
 	}
 
 	const carta = deck.pop(); // Sacamos la última del arreglo
-
-	console.log(`%c🃏 Carta pedida: ${carta}`, "color: #9b59b6;");
-	console.log(`Cartas restantes: ${deck.length}`);
 
 	return carta;
 };
@@ -87,17 +82,13 @@ const valorCarta = (carta) => {
 	 * 3. Si es número: Multiplicamos por 1 para convertir String a Number.
 	 */
 	const puntos = isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
-
-	console.log(`%c-> Valor calculado: ${puntos}`, "color: #f1c40f;");
 	return puntos;
 };
 
-// --- PRUEBA DE EJECUCIÓN ---
-const cartaRobada = pedirCarta();
-const puntosTotales = valorCarta(cartaRobada);
+// Eventos
 
-console.log(
-	"%c--- 📊 Resultado Final ---",
-	"color: #e74c3c; font-weight: bold;",
-);
-console.log({ cartaRobada, puntosTotales });
+btnPedir.addEventListener("click", () => {
+	const carta = pedirCarta();
+	puntosJugador += valorCarta(carta);
+	puntosHTML[0].innerText = puntosJugador;
+});
