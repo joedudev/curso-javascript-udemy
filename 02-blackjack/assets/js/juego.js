@@ -10,8 +10,7 @@ const miModulo = (() => {
 
 	// Referencias del HTML
 	const btnPedir = document.querySelector("#btnPedir"),
-		btnDetener = document.querySelector("#btnDetener"),
-		btnNuevo = document.querySelector("#btnNuevo");
+		btnDetener = document.querySelector("#btnDetener");
 
 	const divCartasJugadores = document.querySelectorAll(".divCartas"),
 		puntosHTML = document.querySelectorAll("small");
@@ -125,7 +124,7 @@ const miModulo = (() => {
 		btnPedir.disabled = true;
 		btnDetener.disabled = true;
 
-		turnoComputadora(puntosJugador);
+		turnoComputadora(puntosJugadores[0]);
 	});
 	return {
 		nuevoJuego: inicializarJuego,
