@@ -60,8 +60,8 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 | 04      | Control Flow & Loops                       |   ✅   | `v0.4.0-logic-flow`      |
 | 05      | **Lab 1: Blackjack Game**                  |   ✅   | `v1.0.0-lab-blackjack`   |
 | 06      | Module Pattern & Optimizations             |   ✅   | `v1.1.0-module-pattern`  |
-| 07      | Classes & ESNext Private Properties        |   🏗️   | `v1.2.0-classes-private` |
-| 08      | Modules & Vite                             |   ⏳   | `v1.3.0-vite-env`        |
+| 07      | Classes & ESNext Private Properties        |   ✅   | `v1.2.0-classes-private` |
+| 08      | Modules & Vite                             |   🏗️   | `v1.3.0-vite-env`        |
 | 09      | Git, GitHub & GitHub Pages                 |   ⏳   | `v1.4.0-git-pages`       |
 | 10      | **Lab 2: Todo App (Vite)**                 |   ⏳   | `v2.0.0-lab-todoapp`     |
 | 11      | Callbacks, Promises & Generators           |   ⏳   | `v2.1.0-async-promises`  |
@@ -76,7 +76,7 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 
 - **Language:** JavaScript (ESNext)
 - **Environment:** Node.js, NPM, Vite
-- **AI Assistants:** I leverage **GitHub Copilot** and **ChatGPT** to optimize my workflow as I follow the [Roadmap.sh Frontend Path](https://roadmap.sh/frontend).
+- **AI Assistants:** I leverage **GitHub Copilot** and **Google Gemini** to optimize my workflow as I follow the [Roadmap.sh Frontend Path](https://roadmap.sh/frontend).
 
 ---
 
