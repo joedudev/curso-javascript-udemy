@@ -5,9 +5,8 @@ import {
 	valorCarta,
 	turnoComputadora,
 	crearCartaHTML,
+	gestionarBotones,
 } from "./usecases";
-// Importamos nuestra nueva utilidad
-import { gestionarBotones } from "./usecases/gestionar-botones";
 
 let deck = [];
 const tipos = ["C", "D", "H", "S"],
