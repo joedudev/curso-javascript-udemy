@@ -6,6 +6,8 @@ import {
 	turnoComputadora,
 	crearCartaHTML,
 } from "./usecases";
+// Importamos nuestra nueva utilidad
+import { gestionarBotones } from "./usecases/gestionar-botones";
 
 let deck = [];
 const tipos = ["C", "D", "H", "S"],
@@ -28,27 +30,20 @@ deck = crearDeck(tipos, especiales);
 btnPedir.addEventListener("click", () => {
 	const carta = pedirCarta(deck);
 
-	puntosJugador = puntosJugador + valorCarta(carta);
+	puntosJugador += valorCarta(carta);
 	puntosHTML[0].innerText = puntosJugador;
 
-	// OPTIMIZADO: Usamos la función modularizada
 	const imgCarta = crearCartaHTML(carta);
 	divCartasJugador.append(imgCarta);
 
-	if (puntosJugador > 21) {
-		btnPedir.disabled = true;
-		btnDetener.disabled = true;
-		turnoComputadora(puntosJugador, puntosHTML[1], divCartasComputadora, deck);
-	} else if (puntosJugador === 21) {
-		btnPedir.disabled = true;
-		btnDetener.disabled = true;
+	if (puntosJugador >= 21) {
+		gestionarBotones(true, btnPedir, btnDetener);
 		turnoComputadora(puntosJugador, puntosHTML[1], divCartasComputadora, deck);
 	}
 });
 
 btnDetener.addEventListener("click", () => {
-	btnPedir.disabled = true;
-	btnDetener.disabled = true;
+	gestionarBotones(true, btnPedir, btnDetener);
 	turnoComputadora(puntosJugador, puntosHTML[1], divCartasComputadora, deck);
 });
 
@@ -59,6 +54,6 @@ btnNuevo.addEventListener("click", () => {
 	puntosHTML[1].innerText = 0;
 	divCartasComputadora.innerHTML = "";
 	divCartasJugador.innerHTML = "";
-	btnPedir.disabled = false;
-	btnDetener.disabled = false;
+
+	gestionarBotones(false, btnPedir, btnDetener);
 });
