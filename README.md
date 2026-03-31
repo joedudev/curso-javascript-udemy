@@ -61,8 +61,8 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 | 05      | **Lab 1: Blackjack Game**                  |   ✅   | `v1.0.0-lab-blackjack`   |
 | 06      | Module Pattern & Optimizations             |   ✅   | `v1.1.0-module-pattern`  |
 | 07      | Classes & ESNext Private Properties        |   ✅   | `v1.2.0-classes-private` |
-| 08      | Modules & Vite                             |   🏗️   | `v1.3.0-vite-env`        |
-| 09      | Git, GitHub & GitHub Pages                 |   ⏳   | `v1.4.0-git-pages`       |
+| 08      | Modules & Vite                             |   ✅   | `v1.3.0-vite-env`        |
+| 09      | Git, GitHub & GitHub Pages                 |   🏗️   | `v1.4.0-git-pages`       |
 | 10      | **Lab 2: Todo App (Vite)**                 |   ⏳   | `v2.0.0-lab-todoapp`     |
 | 11      | Callbacks, Promises & Generators           |   ⏳   | `v2.1.0-async-promises`  |
 | 12      | HTTP Requests & Fetch API                  |   ⏳   | `v2.2.0-http-fetch`      |
