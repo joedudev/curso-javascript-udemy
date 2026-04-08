@@ -4,6 +4,7 @@ import { renderTodos } from "./use-cases/render-todos.js";
 
 const ElementIDs = {
 	todoList: ".todo-list",
+	NewTodoInput: "#new-todo-input",
 };
 
 /**
@@ -22,4 +23,20 @@ export const App = (elementId) => {
 		document.querySelector(elementId).append(app);
 		displayTodos();
 	})();
+
+	//  Refrencias HTML
+
+	const newDescriptionInput = document.querySelector(ElementIDs.NewTodoInput);
+
+	// Listeners
+	newDescriptionInput.addEventListener("keyup", (event) => {
+		// Usar .key es el estándar actual
+		if (event.key !== "Enter") return;
+
+		if (newDescriptionInput.value.trim().length === 0) return;
+
+		todoStore.addTodo(newDescriptionInput.value);
+		displayTodos();
+		newDescriptionInput.value = "";
+	});
 };
