@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from "uuid";
  * @param {string} descripcion
  */
 export class Todo {
-	constructor(descripcion) {
+	constructor(description) {
 		this.id = uuidv4();
-		this.descripcion = descripcion;
+		this.description = description;
 		this.done = false;
 		this.createdAt = new Date();
 	}
