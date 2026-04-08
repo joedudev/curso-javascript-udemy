@@ -28,7 +28,7 @@ const state = {
  */
 const InitStore = () => {
 	console.log("%cStore Initialized 🥑", "color: #2ecc71; font-weight: bold;");
-	console.log(state);
+	loadStore();
 };
 
 /**
@@ -36,7 +36,17 @@ const InitStore = () => {
  * @throws {Error} Si el método no ha sido implementado aún.
  */
 const loadStore = () => {
-	throw new Error("Method not implemented");
+	if (!localStorage.getItem("todo-app-state")) return;
+
+	const { todos = [], filter = Filters.All } = JSON.parse(
+		localStorage.getItem("todo-app-state"),
+	);
+	state.todos = todos;
+	state.filter = filter;
+};
+
+const saveStateToLocalStorage = () => {
+	localStorage.setItem("todo-app-state", JSON.stringify(state));
 };
 
 /**
@@ -71,6 +81,7 @@ const addTodo = (descripcion) => {
 
 	// Creamos la instancia del modelo y la empujamos al arreglo
 	state.todos.push(new Todo(descripcion));
+	saveStateToLocalStorage();
 };
 
 /**
@@ -89,7 +100,6 @@ const toggleTodo = (todoId) => {
 			// Si el ID coincide, invertimos el valor de 'done'
 			todo.done = !todo.done;
 		}
-
 		return todo;
 	});
 
@@ -108,6 +118,7 @@ const toggleTodo = (todoId) => {
 const deleteTodo = (todoId) => {
 	// Filtramos el arreglo: "Quédate con todos los que NO tengan este ID"
 	state.todos = state.todos.filter((todo) => todo.id !== todoId);
+	saveStateToLocalStorage();
 };
 
 /**
@@ -115,6 +126,7 @@ const deleteTodo = (todoId) => {
  */
 const deleteCompleted = () => {
 	state.todos = state.todos.filter((todo) => !todo.done);
+	saveStateToLocalStorage();
 };
 
 /**
@@ -129,6 +141,7 @@ const setFilter = (newFilter = Filters.All) => {
 		);
 	}
 	state.filter = newFilter;
+	saveStateToLocalStorage();
 };
 
 /**
