@@ -46,4 +46,13 @@ export const App = (elementId) => {
 		todoStore.toggleTodo(element.getAttribute("data-id"));
 		displayTodos();
 	});
+
+	// Funcion para borrar TODOs
+	todoListElement.addEventListener("click", (event) => {
+		if (!event.target.classList.contains("destroy")) return;
+
+		const element = event.target.closest("[data-id]");
+		todoStore.deleteTodo(element.getAttribute("data-id"));
+		displayTodos();
+	});
 };
