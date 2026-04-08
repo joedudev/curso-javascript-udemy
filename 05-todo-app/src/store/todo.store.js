@@ -77,26 +77,27 @@ const addTodo = (descripcion) => {
  * ToggleTodo con Diccionario (Eficiencia Máxima)
  * @param {String} todoId
  */
+/**
+ * ToggleTodo compatible con ARREGLOS (La forma correcta para tu código actual)
+ * @param {String} todoId
+ */
 const toggleTodo = (todoId) => {
-	// 1. PRUEBA DE FALLO: Verificamos si la llave existe en el diccionario
-	if (!state.todos[todoId]) {
-		const errorMsg = `Error: El TODO con ID "${todoId}" no existe en el diccionario.`;
-		console.error(
-			`%c${errorMsg}`,
-			"color: white; background: red; padding: 3px;",
-		);
-		throw new Error(errorMsg);
-	}
+	// 1. Buscamos el TODO dentro del arreglo usando .map
+	// .map recorre la lista y nos permite crear una versión nueva con el cambio
+	state.todos = state.todos.map((todo) => {
+		if (todo.id === todoId) {
+			// Si el ID coincide, invertimos el valor de 'done'
+			todo.done = !todo.done;
+		}
 
-	// 2. CAMBIO DE ESTADO: Acceso directo sin bucles (.map o .find)
-	// No recorremos nada, vamos directo a la posición de memoria.
-	const todo = state.todos[todoId];
+		return todo;
+	});
 
-	// Aplicamos inmutabilidad creando un nuevo objeto para esa llave
-	state.todos[todoId] = {
-		...todo,
-		done: !todo.done,
-	};
+	// OPCIONAL: Si quieres mantener tu "Prueba de fallo", tendrías que usar .find primero
+	/*
+  const existe = state.todos.find( t => t.id === todoId );
+  if ( !existe ) throw new Error(`ID ${todoId} no encontrado`);
+  */
 
 	console.log(`%c[Store]: Toggle exitoso para ${todoId}`, "color: #2ecc71;");
 };
