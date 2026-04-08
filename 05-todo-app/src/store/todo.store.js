@@ -74,14 +74,32 @@ const addTodo = (descripcion) => {
 };
 
 /**
- * Cambia el estado de completado (true/false) de un Todo.
- * @param {String} todoId - Identificador único del Todo.
+ * ToggleTodo con Diccionario (Eficiencia Máxima)
+ * @param {String} todoId
  */
 const toggleTodo = (todoId) => {
-	// Tip de Pro: Aquí deberías buscar el todoId y hacer: todo.done = !todo.done
-	throw new Error("Method not implemented");
-};
+	// 1. PRUEBA DE FALLO: Verificamos si la llave existe en el diccionario
+	if (!state.todos[todoId]) {
+		const errorMsg = `Error: El TODO con ID "${todoId}" no existe en el diccionario.`;
+		console.error(
+			`%c${errorMsg}`,
+			"color: white; background: red; padding: 3px;",
+		);
+		throw new Error(errorMsg);
+	}
 
+	// 2. CAMBIO DE ESTADO: Acceso directo sin bucles (.map o .find)
+	// No recorremos nada, vamos directo a la posición de memoria.
+	const todo = state.todos[todoId];
+
+	// Aplicamos inmutabilidad creando un nuevo objeto para esa llave
+	state.todos[todoId] = {
+		...todo,
+		done: !todo.done,
+	};
+
+	console.log(`%c[Store]: Toggle exitoso para ${todoId}`, "color: #2ecc71;");
+};
 /**
  * Elimina un Todo específico del estado.
  * @param {String} todoId - ID de la tarea a borrar.
