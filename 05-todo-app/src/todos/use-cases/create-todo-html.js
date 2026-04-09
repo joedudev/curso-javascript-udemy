@@ -39,7 +39,6 @@ export const createTodoHTML = (todo) => {
             <label>${description}</label>
             <button class="destroy"></button>
         </div>
-        <input class="edit" value="Create a TodoMVC template">
     `;
 
 	// 4. Creación del contenedor principal (elemento <li>)
