@@ -1,5 +1,5 @@
 import { Todo } from "../models/todo.model";
-import { creatTodoHTML } from "./create-todo-html";
+import { createTodoHTML } from "./create-todo-html";
 
 let element;
 
@@ -20,6 +20,6 @@ export const renderTodos = (elementID, todos = []) => {
 
 	// 3. Pintar los TODOs actuales (la lista fresca del Store)
 	todos.forEach((todo) => {
-		element.append(creatTodoHTML(todo));
+		element.append(createTodoHTML(todo));
 	});
 };

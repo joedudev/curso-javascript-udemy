@@ -3,7 +3,7 @@ import { Todo } from "../models/todo.model";
  *
  * @param {Todo} todo
  */
-export const creatTodoHTML = (todo) => {
+export const createTodoHTML = (todo) => {
 	const { done, description, id } = todo;
 
 	if (!todo) throw new Error("Todo is required");
