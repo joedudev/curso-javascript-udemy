@@ -4,7 +4,7 @@ import { Todo } from "../todos/models/todo.model";
  * Enumeración de filtros permitidos.
  * Usamos un objeto congelado para que nadie lo pueda modificar accidentalmente.
  */
-const Filters = {
+export const Filters = {
 	All: "all",
 	Completed: "completed",
 	Pending: "pending",
@@ -19,6 +19,8 @@ const state = {
 		new Todo("Learn JavaScript"),
 		new Todo("Learn Vue.js"),
 		new Todo("Build something awesome"),
+		new Todo("Learn React"),
+		new Todo("Learn Angular"),
 	],
 	filter: Filters.All,
 };
