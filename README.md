@@ -89,4 +89,49 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 
 ---
 
+## 🛸 Expanded Technical Stack
+
+To build these solutions, I utilize a professional ecosystem:
+
+- **Core:** ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-Modularity-yellow?style=for-the-badge)
+- **Frontend & Styles:** ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-State_UI-1572B6?style=for-the-badge&logo=css3)
+- **Build Tools:** ![Vite](https://img.shields.io/badge/Vite.js-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+- **Libraries & Utilities:** ![Underscore](https://img.shields.io/badge/Underscore.js-Logic-black?style=for-the-badge) ![UUID](https://img.shields.io/badge/UUID-NPM_Package-blue?style=for-the-badge)
+- **Dev Environment:** ![Ubuntu](https://img.shields.io/badge/Ubuntu_Linux-E95420?style=for-the-badge&logo=ubuntu&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+
+---
+
+## 🧪 Featured Lab Projects
+
+### 🃏 1. Blackjack Game
+
+A classic card game where the user plays against the computer AI. It features a complete game lifecycle from shuffling to winner determination.
+
+- **Main Repository:** [Blackjack Folder](https://github.com/joedudev/curso-javascript-udemy/tree/main/04-blackjack-vite)
+- **Live Build (Netlify):** [![Netlify Status](https://api.netlify.com/api/v1/badges/409534c8-8e25-494e-a11d-3788a927b7bb/deploy-status)](https://app.netlify.com/projects/joedudev-blackjack-vite/deploys) [Play Here](https://joedudev-blackjack-vite.netlify.app/)
+- **Standalone CI/CD Repo:** [vite-blackjack](https://github.com/joedudev/vite-blackjack)
+- **Live Build (GitHub Pages):** [Play Here](https://joedudev.github.io/vite-blackjack/)
+- **Key Implementation:** Uses **Underscore.js** for high-entropy shuffling and the **Module Pattern** to encapsulate state and prevent variable collision or console manipulation.
+
+### 📝 2. Advanced TODO App
+
+A task management system that demonstrates the full power of JavaScript state handling without the need for frameworks.
+
+- **Source Code:** [Todo App Folder](https://github.com/joedudev/curso-javascript-udemy/tree/main/05-todo-app)
+- **Live Build (Netlify):** [![Netlify Status](https://api.netlify.com/api/v1/badges/99830d52-1c89-41a4-97e5-01ab93324702/deploy-status)](https://app.netlify.com/projects/joedudev-todo-vite-app/deploys) [View App](https://joedudev-todo-vite-app.netlify.app/)
+- **Key Implementation:** Features a centralized **Store pattern** for state management, **LocalStorage** for data persistence, and **UUID** for secure, unique task identification. Includes dynamic filtering and a real-time pending task counter.
+
+---
+
+## ⚙️ Personal Logic & Architectural Implementation
+
+To ensure these projects go beyond the classroom, I have implemented:
+
+- **State Management:** Decoupling the UI from the Data logic using centralized Stores.
+- **Data Persistence:** Leveraging Browser APIs (LocalStorage) to maintain user context across sessions.
+- **Modularity:** Using ES Modules (import/export) to create a clean, maintainable, and scalable project structure.
+- **Defensive Programming:** Using Private properties and closures to protect application integrity.
+
+---
+
 > "The best way to predict the future is to invent it." – _Let's code._
