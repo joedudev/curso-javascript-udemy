@@ -2,7 +2,8 @@ import "./style.css";
 import javascriptLogo from "./assets/javascript.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
-import { enviromentsComponents } from "./concepts/enviroments.js";
+import { enviromentsComponents } from "./concepts/01-enviroments.js";
+import { callbacksComponent } from "./concepts/02-callbacks.js";
 
 document.querySelector("#app").innerHTML = /* html */ `
 <section id="center">
@@ -19,4 +20,5 @@ document.querySelector("#app").innerHTML = /* html */ `
 
 const element = document.querySelector(".card");
 
-enviromentsComponents(element);
+// enviromentsComponents(element);
+callbacksComponent(element);
