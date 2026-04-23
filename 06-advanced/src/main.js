@@ -5,6 +5,7 @@ import heroImg from "./assets/hero.png";
 import { enviromentsComponents } from "./concepts/01-enviroments.js";
 import { callbacksComponent } from "./concepts/02-callbacks.js";
 import { promiseComponent } from "./concepts/03-promises.js";
+import { promiseRaceComponent } from "./concepts/04-promise-race.js";
 
 document.querySelector("#app").innerHTML = /* html */ `
 <section id="center">
@@ -23,4 +24,5 @@ const element = document.querySelector(".card");
 
 // enviromentsComponents(element);
 // callbacksComponent(element);
-promiseComponent(element);
+// promiseComponent(element);
+promiseRaceComponent(element);
