@@ -1,60 +1,85 @@
 import { heroes } from "../data/heroes";
 
 /**
- * COMPONENTE: Uso de Async y Await
- * Este componente muestra la forma más moderna y legible de manejar promesas,
- * permitiendo que el código espere resultados sin usar .then() o .catch().
- * * @param {HTMLDivElement} element - Contenedor principal de la interfaz.
+ * COMPONENTE: Manejo de Errores con Try/Catch en Async/Await.
+ * Este patrón permite capturar excepciones de forma limpia, evitando que la aplicación
+ * se detenga bruscamente y ofreciendo feedback al usuario.
+ * @param {HTMLDivElement} element - Contenedor principal de la interfaz.
  */
 export const asyncAwaitComponent = async (element) => {
-	const d1 = "5d86371f2343e37870b91ef1"; // Hulk
-	const d2 = "5d86371f25a058e5b1c8a65e"; // Iron Man
+	const d1 = "5d86371f2343e37870b91ef1";
+	const d2 = "5d86371f25a058e5b1c8a65e";
 
-	console.log("%c[Async]: Iniciando componente...", "color: #3498db;");
-	console.time("⏱️ Duración Await");
+	console.log(
+		"%c[Async]: Iniciando flujo con protección de errores...",
+		"color: #3498db; font-weight: bold;",
+	);
+	console.time("⏱️ Duración Total");
 
 	/**
-	 * EXPLICACIÓN DEL AWAIT:
-	 * La palabra 'await' le dice a JavaScript: "Detente aquí. No pases a la siguiente
-	 * línea hasta que la promesa de findHero se resuelva".
-	 * El valor resuelto se asigna directamente a la variable.
+	 * BLOQUE TRY:
+	 * Aquí va todo el código "optimista". Intentamos ejecutar las tareas asíncronas
+	 * asumiendo que todo saldrá bien.
 	 */
+	try {
+		const hero1 = await findHero(d1);
+		console.log(`%c[Paso 1]: ${hero1.name} cargado.`, "color: #2ecc71;");
 
-	// El hilo de ejecución espera 1 segundo aquí...
-	const hero1 = await findHero(d1);
-	console.log(`%c[Paso 1]: ${hero1.name} obtenido.`, "color: #2ecc71;");
+		const hero2 = await findHero(d2);
+		console.log(`%c[Paso 2]: ${hero2.name} cargado.`, "color: #2ecc71;");
 
-	// ... y luego espera otro segundo aquí.
-	const hero2 = await findHero(d2);
-	console.log(`%c[Paso 2]: ${hero2.name} obtenido.`, "color: #2ecc71;");
+		element.innerHTML = /* html */ `
+            <div style="background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #a855f7;">
+                <h3 style="margin: 0; color: #a855f7;">Dúo Dinámico:</h3>
+                <p style="font-size: 20px; color: #f1f5f9; margin-top: 10px;">
+                    ${hero1.name} <span style="color: #94a3b8;">/</span> ${hero2.name}
+                </p>
+            </div>
+        `;
+	} catch (error) {
+		/**
+		 * BLOQUE CATCH:
+		 * Si CUALQUIER 'await' dentro del bloque 'try' falla o lanza un error (throw),
+		 * el control salta inmediatamente aquí.
+		 */
+		console.error(
+			`%c[Error Capturado]: ${error.message}`,
+			"color: #ef4444; font-weight: bold;",
+		);
 
-	// Esta línea no se ejecuta hasta que AMBOS awaits hayan terminado.
-	element.innerHTML = /* html */ `
-        <div style="background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #a855f7;">
-            <h3 style="margin: 0; color: #a855f7;">Dúo Dinámico:</h3>
-            <p style="font-size: 20px; color: #f1f5f9; margin-top: 10px;">
-                ${hero1.name} <span style="color: #94a3b8;">/</span> ${hero2.name}
-            </p>
-        </div>
-    `;
-
-	console.timeEnd("⏱️ Duración Await");
+		element.innerHTML = /* html */ `
+            <div style="background: #450a0a; padding: 15px; border-radius: 10px; border: 1px solid #ef4444;">
+                <b style="color: #fecaca;">🚨 Error en la petición:</b>
+                <p style="color: #fca5a5; margin: 5px 0 0 0;">${error.message}</p>
+            </div>
+        `;
+	} finally {
+		/**
+		 * BLOQUE FINALLY (Opcional pero recomendado):
+		 * Se ejecuta siempre, haya habido error o no. Ideal para limpiar estados de carga.
+		 */
+		console.timeEnd("⏱️ Duración Total");
+		console.log(
+			"%c[Sistema]: Limpieza de proceso asíncrono.",
+			"color: #7f8c8d;",
+		);
+	}
 };
 
 /**
- * Busca un héroe por ID.
- * Al ser 'async', esta función siempre devuelve una Promesa.
- * * @param {String} id - UUID del héroe.
- * @returns {Promise<Object>} El objeto del héroe encontrado.
+ * Busca un héroe por ID con simulación de retraso.
+ * @param {String} id - Identificador del héroe.
+ * @returns {Promise<Object>} El héroe encontrado.
  * @throws {Error} Si el héroe no existe.
  */
 const findHero = async (id) => {
 	const hero = heroes.find((h) => h.id === id);
 
-	// Simulamos un retraso de red (esto es necesario para apreciar el await)
+	// Simulamos latencia de red de 1 segundo
 	await new Promise((resolve) => setTimeout(resolve, 1000));
 
 	if (!hero) {
+		// Al lanzar un Error aquí, el bloque 'catch' del padre se activa automáticamente
 		throw new Error(`Hero with id ${id} not found`);
 	}
 
