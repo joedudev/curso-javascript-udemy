@@ -33,6 +33,7 @@ export const asyncComponent = (element) => {
                 </b>
             `;
 		});
+	console.log("%c[Async]: Finalizando findHero...", "color: #3498db;");
 };
 
 /**
