@@ -1,16 +1,30 @@
+import { getPokemonById } from "./actions/get-pokemon-by-id.action";
+
 /**
- * Pokemon App
- * @param {HTMLElement} element - The HTML element where the app will be rendered.
- * @returns {void}
- * @description This function initializes the Pokemon App by rendering the necessary HTML structure and setting up any required event listeners or state management. The app will allow users to search for and display information about different Pokemon.
+ * Orquesta la inicialización y renderizado de la aplicación de Pokémon.
+ * @param {HTMLElement} element - El contenedor del DOM donde se inyectarán las tarjetas.
  */
 export const pokemonApp = (element) => {
-	document.title = "Pokemon App";
+	// 1. Modificaciones estéticas iniciales de la interfaz
+	document.title = "Pokémon App 🎮";
+
 	const mainPageTitle = document.querySelector(".app-title");
 	if (mainPageTitle) {
-		mainPageTitle.textContent = "Pokemon App";
+		mainPageTitle.textContent = "PokéAPI App";
 	}
 
-	console.log("Pokemon App initialized");
-	console.log("Element:", element);
+	console.log(
+		"%c[App]: Pokémon App inicializada con éxito.",
+		"color: #3498db; font-weight: bold;",
+	);
+
+	// 2. Estado Inicial de Carga en la UI usando tu extensión HTML
+	element.innerHTML = /* html */ `
+    <div style="color: #94a3b8; font-style: italic; text-align: center;">
+      Buscando datos en el servidor... 🔍
+    </div>
+  `;
+
+	// 3. Disparamos la acción de consulta (Pedimos el ID 1 de forma inicial)
+	getPokemonById(1);
 };
