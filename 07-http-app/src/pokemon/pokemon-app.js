@@ -4,105 +4,147 @@ import { getPokemonById } from "./actions/get-pokemon-by-id.action";
 const html = String.raw;
 
 /**
- * Orquesta la inicialización, la creación de nodos en el DOM y el renderizado dinámico de Pokémon.
+ * Componente principal que orquesta la aplicación de Pokémon, controlando su navegación y estado asíncrono.
  * @param {HTMLElement} element - El contenedor raíz donde se inyectará la tarjeta de información.
  * @returns {Promise<void>}
  */
 export const pokemonApp = async (element) => {
+	// ==========================================
+	// ESTADO LOCAL DE LA APLICACIÓN
+	// ==========================================
+	let pokemonId = 1; // Controla el índice del Pokémon activo en la UI
+
 	document.title = "Pokémon App 🎮";
 
-	// 1. Modificación de elementos preexistentes en el layout global
+	// Modificación del layout general preexistente
 	const mainPageTitle = document.querySelector(".app-title");
 	if (mainPageTitle) {
 		mainPageTitle.textContent = "PokéAPI App Real-Time";
 	}
 
 	console.log(
-		"%c[DOM]: Creando elementos reactivos en memoria...",
+		"%c[DOM]: Inicializando elementos reactivos en memoria...",
 		"color: #3498db; font-weight: bold;",
 	);
 
 	// ==========================================
-	// 2. FASE DE CREACIÓN DE ELEMENTOS (NATIVO)
+	// 1. FASE DE CREACIÓN DE NODOS (NATIVO)
 	// ==========================================
 	const loadingParagraph = document.createElement("p");
 	const pokemonImage = document.createElement("img");
 	const nextButton = document.createElement("button");
 	const prevButton = document.createElement("button");
 
-	// Estilos rápidos en línea (Opcional, combinando con tu tema oscuro)
-	loadingParagraph.style.color = "#94a3b8";
-	loadingParagraph.style.fontStyle = "italic";
-	pokemonImage.style.width = "150px";
-	pokemonImage.style.height = "150px";
+	// ==========================================
+	// 2. CONFIGURACIONES DE CLASES & TEXTOS (CSS)
+	// ==========================================
+	// Nota: Eliminamos .style de JavaScript. Usamos clases que tu style.css controla.
+	loadingParagraph.className = "loading-text";
+	pokemonImage.className = "pokemon-sprite";
+	nextButton.className = "btn-nav btn-next";
+	prevButton.className = "btn-nav btn-prev";
 
-	// ==========================================
-	// 3. CONFIGURACIONES INICIALES (ESTADO DE CARGA)
-	// ==========================================
 	loadingParagraph.textContent = "Cargando información del Pokémon... ⏳";
 	nextButton.textContent = "Siguiente Pokémon →";
 	prevButton.textContent = "← Pokémon Anterior";
 
-	// Deshabilitado inicialmente porque arrancamos en el ID 1 (No hay ID 0)
+	// El botón anterior inicia apagado porque arrancamos en el ID 1
 	prevButton.disabled = true;
 
 	// ==========================================
-	// 4. INSERCIÓN EN EL DOM (MOSTRAR AL USUARIO)
+	// 3. MONTAJE EN EL DOM
 	// ==========================================
-	// Insertamos los nodos vacíos. El usuario ya ve los botones y el indicador de carga.
 	element.appendChild(loadingParagraph);
 	element.appendChild(pokemonImage);
-	element.appendChild(prevButton); // Orden lógico: Anterior primero, luego Siguiente
+	element.appendChild(prevButton);
 	element.appendChild(nextButton);
 
 	// ==========================================
-	// 5. MÉTODOS DE ACTUALIZACIÓN DE LA UI
+	// 4. MÉTODOS DE MUTACIÓN DE INTERFAZ
 	// ==========================================
 	/**
-	 * Modifica las propiedades de los nodos ya inyectados en el DOM con la información real.
-	 * @param {{id: Number, name: String, image: String}} pokemon - Objeto procesado por la acción.
+	 * Hidrata los elementos del DOM usando los datos de un Pokémon específico.
+	 * Cambiamos el nombre del parámetro a 'activePokemon' para mayor claridad semántica.
+	 * @param {{id: Number, name: String, image: String}} activePokemon - Datos del Pokémon a renderizar.
 	 */
-	const renderPokemon = (pokemon) => {
+	const renderPokemon = (activePokemon) => {
 		console.log(
-			`%c[UI]: ¡Datos listos! Hidratando el DOM con: ${pokemon.name.toUpperCase()}`,
+			`%c[UI]: Renderizando a -> ${activePokemon.name.toUpperCase()}`,
 			"color: #a855f7; font-weight: bold;",
 		);
 
-		// Inyectamos las propiedades directamente sobre los nodos existentes en memoria
-		pokemonImage.src = pokemon.image;
-		pokemonImage.alt = pokemon.name;
+		pokemonImage.src = activePokemon.image;
+		pokemonImage.alt = activePokemon.name;
+		loadingParagraph.textContent = `Pokémon #${activePokemon.id} - ${activePokemon.name.toUpperCase()}`;
 
-		// Aplicamos interpolación limpia de variables
-		loadingParagraph.textContent = `Pokémon #${pokemon.id} - ${pokemon.name.toUpperCase()}`;
-		loadingParagraph.style.fontStyle = "normal";
-		loadingParagraph.style.color = "#f1f5f9";
+		// Validamos el estado del botón anterior basándonos en el ID actual
+		prevButton.disabled = activePokemon.id <= 1;
 	};
 
 	// ==========================================
-	// 6. Escuchador de eventos para navegación entre Pokémon
+	// 5. ESCUCHADORES DE EVENTOS (LISTENERS ASÍNCRONOS)
 	// ==========================================
+	nextButton.addEventListener("click", async () => {
+		pokemonId++;
+		console.log(
+			`%c[Navegación]: Solicitando siguiente ID -> ${pokemonId}`,
+			"color: #e67e22;",
+		);
+
+		try {
+			loadingParagraph.textContent = "Cargando siguiente Pokémon... ⏳";
+
+			// Renombramos la variable local a 'fetchedPokemon' para romper la confusión semántica
+			const fetchedPokemon = await getPokemonById(pokemonId);
+			renderPokemon(fetchedPokemon);
+		} catch (error) {
+			console.error(
+				"%c[Error UI]: Fallo al avanzar de Pokémon.",
+				"color: red;",
+			);
+			loadingParagraph.textContent =
+				"Error al cargar los datos del Pokémon. ❌";
+		}
+	});
+
+	prevButton.addEventListener("click", async () => {
+		if (pokemonId <= 1) return; // Validación de seguridad antes de restar
+
+		pokemonId--;
+		console.log(
+			`%c[Navegación]: Solicitando ID anterior -> ${pokemonId}`,
+			"color: #e67e22;",
+		);
+
+		try {
+			loadingParagraph.textContent = "Cargando Pokémon anterior... ⏳";
+
+			const fetchedPokemon = await getPokemonById(pokemonId);
+			renderPokemon(fetchedPokemon);
+		} catch (error) {
+			console.error(
+				"%c[Error UI]: Fallo al retroceder de Pokémon.",
+				"color: red;",
+			);
+			loadingParagraph.textContent =
+				"Error al cargar los datos del Pokémon. ❌";
+		}
+	});
 
 	// ==========================================
-	// 7. PETICIÓN HTTP & DISPARO DE RENDER
+	// 6. CARGA DE INICIALIZACIÓN
 	// ==========================================
-	console.log(
-		"%c[Async]: Esperando respuesta del servidor externo...",
-		"color: #e67e22;",
-	);
+	console.log("%c[Async]: Disparando consulta inicial...", "color: #3498db;");
 
 	try {
-		// El hilo de ejecución de la app se detiene aquí hasta que el objeto Pokémon sea devuelto
-		const pokemonInicial = await getPokemonById(1);
-
-		// Ejecutamos la hidratación del HTML con los datos reales
-		renderPokemon(pokemonInicial);
+		const initialPokemon = await getPokemonById(pokemonId);
+		renderPokemon(initialPokemon);
 	} catch (error) {
 		console.error(
-			"%c[Error en App]: No se pudo realizar el renderizado inicial.",
+			"%c[Error UI]: Error crítico en el renderizado inicial.",
 			"color: red;",
 		);
 		loadingParagraph.textContent =
 			"Error al conectar con la base de datos de Pokémon. ❌";
-		loadingParagraph.style.color = "#ef4444";
 	}
 };
