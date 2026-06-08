@@ -1,5 +1,9 @@
 import "./style.css";
+import { UserApp } from "./users/users-app";
 
 const html = String.raw;
 
-document.querySelector("#app").innerHTML = html` <h1>Hola</h1> `;
+const appElement = document.querySelector("#app");
+
+appElement.innerHTML = html` <h1>CRUD APP</h1> `;
+UserApp(appElement);
