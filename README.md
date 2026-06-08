@@ -65,8 +65,8 @@ I use **Semantic Versioning** tags to mark the completion of each module.
 | 09      | Git, GitHub & GitHub Pages                 |   ✅   | `v1.4.0-git-pages`       |
 | 10      | **Lab 2: Todo App (Vite)**                 |   ✅   | `v2.0.0-lab-todoapp`     |
 | 11      | Callbacks, Promises & Generators           |   ✅   | `v2.1.0-async-promises`  |
-| 12      | HTTP Requests & Fetch API                  |   🏗️   | `v2.2.0-http-fetch`      |
-| 13      | **Lab 3: CRUD App (No Frameworks)**        |   ⏳   | `v3.0.0-lab-crud`        |
+| 12      | HTTP Requests & Fetch API                  |   ✅   | `v2.2.0-http-fetch`      |
+| 13      | **Lab 3: CRUD App (No Frameworks)**        |   🏗️   | `v3.0.0-lab-crud`        |
 | 14      | Advanced ESNext Features                   |   ⏳   | `v3.1.0-esnext-new`      |
 | 15      | File Uploads & Final Polish                |   ⏳   | `v4.0.0-completed`       |
 
