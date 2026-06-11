@@ -1,12 +1,20 @@
 import { loadUsersByPage } from "../use-cases/load-users-by-page";
 
+// Estado centralizado
 const state = {
 	currentPage: 0,
 	users: [],
 };
 
+/**
+ * Incrementa la página y carga los datos desde el servicio.
+ */
 const loadNextPage = async () => {
-	await loadUsersByPage(state.currentPage + 1);
+	const users = await loadUsersByPage(state.currentPage + 1);
+
+	// Actualizamos el estado
+	state.currentPage += 1;
+	state.users = users;
 };
 
 const loadPreviousPage = async () => {
